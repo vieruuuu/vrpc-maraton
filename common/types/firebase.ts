@@ -1,7 +1,13 @@
 import { type User } from "types/users";
+import type { Quiz } from "./quizzes";
+import type { QuizResponse } from "./quiz-responses";
+import type { QuizSolution } from "./quiz-solutions";
 
 export type CollectionsMap = {
   users: User;
+  quizzes: Quiz;
+  "quiz-responses": QuizResponse;
+  "quiz-solutions": QuizSolution;
 };
 
 export type CollectionKey = keyof CollectionsMap;

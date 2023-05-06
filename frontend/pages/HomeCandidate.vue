@@ -7,6 +7,8 @@
     </div>
     <div class="text-h5">Earn badges to see more bounties!</div>
 
+    <q-btn label="Go to quizze s" to="/quizzes" />
+
     <q-btn
       :label="flipped ? 'Flip Bounties' : 'Check out your bounties!'"
       :disable="!flipped"

@@ -12,6 +12,7 @@ export const QuizQuestion = z.object({
 export type QuizQuestion = z.infer<typeof QuizQuestion>;
 
 export const QuizBadges = [
+  "javascript",
   "typescript",
   "java",
   "php",
@@ -29,7 +30,7 @@ export type QuizBadge = (typeof QuizBadges)[number];
 export const Quiz = z.object({
   id: z.string(),
 
-  quizAnswerId: z.string(),
+  quizSolutionId: z.string(),
 
   questions: QuizQuestion.array(),
 

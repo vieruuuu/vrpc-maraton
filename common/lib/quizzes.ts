@@ -22,5 +22,7 @@ export function formatBadgeName(badge: QuizBadge): string {
       return "Rust";
     case "typescript":
       return "Typescript";
+    case "javascript":
+      return "Javascript";
   }
 }
