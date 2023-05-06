@@ -37,6 +37,8 @@ const initialUserState: User = {
 export const useAuthStore = defineRefStore("auth", () => {
   const user = ref<User>(klona(initialUserState));
 
+  const enableLoginHook = ref(true);
+
   const userSaved = ref(!!LocalStorage.getItem<boolean>("userSaved"));
   const userLogged = ref(false);
 
@@ -72,6 +74,7 @@ export const useAuthStore = defineRefStore("auth", () => {
     userSaved,
     userLogged,
     setUser,
+    enableLoginHook,
     signOut,
   };
 });

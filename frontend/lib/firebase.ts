@@ -51,12 +51,12 @@ if (import.meta.env.DEV) {
 }
 
 export function loginHook() {
-  const { setUser, signOut } = useAuthStore();
+  const { setUser, signOut, enableLoginHook } = useAuthStore();
 
   router.push("/");
 
   onAuthStateChanged(firebaseAuth, async (user) => {
-    if (user && user.email) {
+    if (user && user.email && enableLoginHook.value) {
       const userData = await getDocument("users", user.uid);
 
       if (!userData) {

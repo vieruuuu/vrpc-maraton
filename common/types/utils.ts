@@ -13,3 +13,5 @@ export const Float = z.number();
 export const Int = Float.int();
 
 export const Min1Int = Int.min(1);
+
+export const Min1String = z.string().min(1);

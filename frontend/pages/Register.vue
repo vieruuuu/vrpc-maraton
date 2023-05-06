@@ -150,12 +150,13 @@ watch(
   { immediate: true }
 );
 
-const { setUser } = useAuthStore();
+const { setUser, enableLoginHook } = useAuthStore();
 
 const loading = ref(false);
 
 async function register() {
   loading.value = true;
+  enableLoginHook.value = false;
 
   try {
     const { user } = await createUserWithEmailAndPassword(
@@ -185,5 +186,6 @@ async function register() {
   passwordConfirm.value = "";
 
   loading.value = false;
+  enableLoginHook.value = true;
 }
 </script>
