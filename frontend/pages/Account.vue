@@ -4,14 +4,30 @@
       <div>
         <q-item>
           <q-item-section avatar>
-            <q-avatar size="xl">
-              <img src="https://xsgames.co/randomusers/avatar.php?g=male" />
+            <q-avatar size="80px">
+              <img
+                class="fit"
+                :src="
+                  'https://xsgames.co/randomusers/assets/avatars/' +
+                  (user.registerDate % 2 === 0 ? 'male' : 'female') +
+                  '/' +
+                  (user.registerDate % 78) +
+                  '.jpg'
+                "
+              />
             </q-avatar>
           </q-item-section>
 
-          <q-item-section class="text-body1">
-            <q-item-label>{{ formatUserName(user) }}</q-item-label>
-            <q-item-label caption>Type:{{ user.details.type }}</q-item-label>
+          <q-item-section>
+            <q-item-label class="text-h6">
+              {{ formatUserName(user) }}
+            </q-item-label>
+            <q-item-label caption>
+              Member since:{{ formatDate(user.registerDate) }}
+            </q-item-label>
+            <q-item-label caption>
+              Last login:{{ formatDate(user.lastLogin) }}
+            </q-item-label>
           </q-item-section>
         </q-item>
 
@@ -45,6 +61,7 @@
 
 <script setup lang="ts">
 import { formatUserName } from "common/lib/users";
+import { formatDate } from "common/lib/date";
 
 const { user, signOut } = useAuthStore();
 </script>
