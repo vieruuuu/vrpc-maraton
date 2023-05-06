@@ -2,9 +2,11 @@
   <q-layout view="hHh Lpr lff">
     <q-header bordered>
       <q-toolbar>
-        <q-toolbar-title> vrpc-maraton </q-toolbar-title>
+        <q-toolbar-title class="cursor-pointer" @click="router.push('/home')">
+          vrpc-maraton
+        </q-toolbar-title>
 
-        <q-btn label="Sign out" @click="signOut" />
+        <q-btn label="Account" to="/account" />
       </q-toolbar>
     </q-header>
 
@@ -27,5 +29,5 @@
 </template>
 
 <script setup lang="ts">
-const { signOut } = useAuthStore();
+const router = useRouter();
 </script>

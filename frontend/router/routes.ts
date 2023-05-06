@@ -21,7 +21,8 @@ const routes = [
     path: "/",
     component: DefaultLayout,
     children: [
-      { path: "home", component: () => import("@/pages/HomeCompany.vue") },
+      { path: "home", component: () => import("@/pages/Home.vue") },
+      { path: "account", component: () => import("@/pages/Account.vue") },
     ],
   },
 

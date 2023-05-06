@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <h1>Candidate</h1>
 </template>
 
-<script setup></script>
+<script setup lang="ts"></script>
