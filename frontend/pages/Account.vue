@@ -2,34 +2,38 @@
   <div class="q-mt-xl">
     <q-card>
       <div>
-        <q-item>
-          <q-item-section avatar>
-            <q-avatar size="80px">
-              <img
-                class="fit"
-                :src="
-                  'https://xsgames.co/randomusers/assets/avatars/' +
-                  (user.registerDate % 2 === 0 ? 'male' : 'female') +
-                  '/' +
-                  (user.registerDate % 78) +
-                  '.jpg'
-                "
-              />
-            </q-avatar>
-          </q-item-section>
+        <q-card-section class="bg-secondary">
+          <q-item>
+            <q-item-section avatar>
+              <q-avatar size="80px">
+                <img
+                  class="fit"
+                  :src="
+                    'https://xsgames.co/randomusers/assets/avatars/' +
+                    (user.registerDate % 2 === 0 ? 'male' : 'pixel') +
+                    '/' +
+                    (user.registerDate % 58) +
+                    '.jpg'
+                  "
+                />
+              </q-avatar>
+            </q-item-section>
 
-          <q-item-section>
-            <q-item-label class="text-h6">
-              {{ formatUserName(user) }}
-            </q-item-label>
-            <q-item-label caption>
-              Member since:{{ formatDate(user.registerDate) }}
-            </q-item-label>
-            <q-item-label caption>
-              Last login:{{ formatDate(user.lastLogin) }}
-            </q-item-label>
-          </q-item-section>
-        </q-item>
+            <q-item-section>
+              <q-item-label class="text-h6">
+                {{ formatUserName(user) }}
+              </q-item-label>
+              <q-item-label caption class="text-black">
+                <span class="text-bold">Member since:</span
+                >{{ formatDate(user.registerDate) }}
+              </q-item-label>
+              <q-item-label caption class="text-black">
+                <span class="text-bold">Last login:</span>
+                {{ formatDate(user.lastLogin) }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-card-section>
 
         <template v-if="user.details.type === 'candidate'">
           <div class="q-ma-lg">

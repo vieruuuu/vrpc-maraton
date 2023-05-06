@@ -32,24 +32,24 @@ export function formatBadgeColor(badge: QuizBadge): string {
     case "c":
       return "yellow";
     case "cpp":
-      return "yellow";
+      return "light-blue-10";
     case "csharp":
-      return "yellow";
+      return "purple";
     case "css":
-      return "yellow";
+      return "light-blue-7";
     case "driving-license":
-      return "yellow";
+      return "red";
     case "html":
-      return "yellow";
+      return "deep-orange-8";
     case "java":
-      return "yellow";
+      return "amber-10";
     case "php":
-      return "yellow";
+      return "light-blue-6";
     case "rust":
-      return "yellow";
+      return "grey-14";
     case "typescript":
       return "blue";
     case "javascript":
-      return "yellow";
+      return "amber-7";
   }
 }

@@ -41,17 +41,24 @@
               </div>
             </div>
             <div class="q-my-sm">
-              <div>
+              <div class="q-gutter-sm">
+                <q-badge
+                  :label="job.level"
+                  outline
+                  color="white"
+                  class="text-subtitle2 text-bold"
+                />
                 <q-badge
                   v-for="badge in job.requiredBadges"
                   :key="badge"
-                  :label="badge"
+                  :label="formatBadgeName(badge)"
                   outline
                   :color="formatBadgeColor(badge)"
                   class="text-subtitle2 text-bold"
                 />
               </div>
             </div>
+
             <div class="text-h6 text-bold q-mt-sm q-mb-xs">Posted by:</div>
             <q-item class="bg-secondary">
               <q-item-section avatar>
@@ -61,14 +68,24 @@
               </q-item-section>
 
               <q-item-section class="text-primary">
-                <q-item-label>Allied Testing</q-item-label>
+                <q-item-label>bytex</q-item-label>
                 <q-item-label caption class="text-bold"> Company </q-item-label>
               </q-item-section>
             </q-item>
           </q-card-section>
 
-          <q-card-actions style="position: absolute; bottom: 0">
-            <q-btn label="Apply" color="secondary" text-color="primary" />
+          <q-card-actions
+            style="position: absolute; bottom: 0"
+            class="row full-width"
+          >
+            <div class="col-12">
+              <q-btn
+                class="fit"
+                label="Apply"
+                color="secondary"
+                text-color="primary"
+              />
+            </div>
           </q-card-actions>
         </q-card>
       </transition>
@@ -79,6 +96,7 @@
 <script setup lang="ts">
 import type { Job } from "types/job";
 import { formatBadgeColor } from "common/lib/quizzes";
+import { formatBadgeName } from "common/lib/quizzes";
 
 const props = defineProps<{
   job: any;
