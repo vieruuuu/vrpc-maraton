@@ -1,37 +1,46 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApp, getApps } from "firebase/app";
 import {
   browserLocalPersistence,
   browserSessionPersistence,
   indexedDBLocalPersistence,
   initializeAuth,
   onAuthStateChanged,
+  getAuth,
 } from "firebase/auth";
-import { initializeFirestore } from "firebase/firestore/lite";
+import { getFirestore, initializeFirestore } from "firebase/firestore/lite";
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 import { getStorage } from "firebase/storage";
-import { fetchDocument } from "./firestore";
+import { getDocument } from "./firestore";
 import { Router } from "@/router";
 
-export const firebaseApp = initializeApp({
-  apiKey: import.meta.env.VITE_FIREBASE_apiKey,
-  authDomain: import.meta.env.VITE_FIREBASE_authDomain,
-  projectId: import.meta.env.VITE_FIREBASE_projectId,
-  storageBucket: import.meta.env.VITE_FIREBASE_storageBucket,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_messagingSenderId,
-  appId: import.meta.env.VITE_FIREBASE_appId,
-});
+const appInitialized = getApps().length;
 
-export const firestore = initializeFirestore(firebaseApp, {
-  ignoreUndefinedProperties: true,
-});
+const firebaseApp = appInitialized
+  ? getApp()
+  : initializeApp({
+      apiKey: import.meta.env.VITE_FIREBASE_apiKey,
+      authDomain: import.meta.env.VITE_FIREBASE_authDomain,
+      projectId: import.meta.env.VITE_FIREBASE_projectId,
+      storageBucket: import.meta.env.VITE_FIREBASE_storageBucket,
+      messagingSenderId: import.meta.env.VITE_FIREBASE_messagingSenderId,
+      appId: import.meta.env.VITE_FIREBASE_appId,
+    });
 
-export const firebaseAuth = initializeAuth(firebaseApp, {
-  persistence: [
-    indexedDBLocalPersistence,
-    browserLocalPersistence,
-    browserSessionPersistence,
-  ],
-});
+export const firestore = appInitialized
+  ? getFirestore(firebaseApp)
+  : initializeFirestore(firebaseApp, {
+      ignoreUndefinedProperties: true,
+    });
+
+export const firebaseAuth = appInitialized
+  ? getAuth(firebaseApp)
+  : initializeAuth(firebaseApp, {
+      persistence: [
+        indexedDBLocalPersistence,
+        browserLocalPersistence,
+        browserSessionPersistence,
+      ],
+    });
 
 export const firebaseStorage = getStorage(firebaseApp);
 
@@ -48,7 +57,7 @@ export function loginHook() {
 
   onAuthStateChanged(firebaseAuth, async (user) => {
     if (user && user.email) {
-      const [userData] = await Promise.all([fetchDocument("users", user.uid)]);
+      const [userData] = await Promise.all([getDocument("users", user.uid)]);
 
       setUser(userData);
     } else {

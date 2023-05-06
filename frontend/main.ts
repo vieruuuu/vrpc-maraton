@@ -3,6 +3,14 @@ import "quasar/src/css/index.sass";
 
 import "./css/app.scss";
 
+import { initializeApp } from "firebase/app";
+import {
+  browserLocalPersistence,
+  browserSessionPersistence,
+  indexedDBLocalPersistence,
+  initializeAuth,
+} from "firebase/auth";
+import { initializeFirestore } from "firebase/firestore/lite";
 import { createPinia } from "pinia";
 import {
   Dialog,

@@ -1,68 +1,154 @@
-import type { FirestoreCollection } from "types/collections";
-import { firestore } from "./firebase";
-
 import {
+  type DocumentData,
+  FieldPath,
+  FieldValue,
+  QueryConstraint,
+  QuerySnapshot,
+  addDoc,
+  collection,
+  deleteDoc,
   doc,
   getDoc,
-  collection as firestoreCollection,
-  query,
   getDocs,
-  QueryConstraint,
-  getCount,
+  getFirestore,
+  limit,
+  limitToLast,
+  orderBy,
+  query,
+  setDoc,
+  updateDoc,
+  where,
 } from "firebase/firestore/lite";
+import type {
+  CollectionKey,
+  CollectionsMap,
+  NewQueryReturn,
+  addDocumentFunc,
+  deleteDocumentFunc,
+  getDocumentFunc,
+  newQueryFunc,
+  queryDocumentsFuncMap,
+  setDocumentFunc,
+  updateDocumentFunc,
+} from "types/firebase";
 
-export async function fetchDocument<
-  T extends keyof FirestoreCollection,
-  G extends FirestoreCollection[T]
->(collection: T, id: string): Promise<G | undefined> {
-  const docRef = doc(firestore, collection, id);
-  const snap = await getDoc(docRef);
+export const getDocument: getDocumentFunc = async <
+  T extends CollectionKey,
+  G extends CollectionsMap[T]
+>(
+  col: T,
+  id: string
+) => {
+  const db = getFirestore();
 
-  const data = snap.data() as G;
+  const docRef = doc(db, col, id);
+  const docSnap = await getDoc(docRef);
 
-  if (!data) {
+  if (!docSnap.exists()) {
     return undefined;
   }
 
   return {
-    ...data,
-    id: snap.id,
+    ...(docSnap.data() as G),
+    id,
   };
-}
+};
 
-export async function queryDocuments<
-  T extends keyof FirestoreCollection,
-  G extends FirestoreCollection[T]
->(collection: T, queries: QueryConstraint[]): Promise<G[]> {
-  const collectionRef = firestoreCollection(firestore, collection);
+export const addDocument: addDocumentFunc<FieldValue> = async (col, data) => {
+  const db = getFirestore();
+  const colRef = collection(db, col);
 
-  const q = query(collectionRef, ...queries);
+  const docRef = await addDoc<DocumentData>(colRef, data);
 
-  const snaps = await getDocs(q);
+  return docRef.id;
+};
 
-  const docs: G[] = [];
+export const deleteDocument: deleteDocumentFunc = async (col, id) => {
+  const db = getFirestore();
 
-  snaps.forEach((docSnap) => {
-    if (docSnap.exists()) {
-      docs.push({
-        ...(docSnap.data() as G),
-        id: docSnap.id,
-      });
-    }
-  });
+  const docRef = doc(db, col, id);
 
-  return docs;
-}
+  await deleteDoc(docRef);
+};
 
-export async function queryDocumentsCount<T extends keyof FirestoreCollection>(
-  collection: T,
-  queries: QueryConstraint[]
-): Promise<number> {
-  const collectionRef = firestoreCollection(firestore, collection);
+export const setDocument: setDocumentFunc = async (col, id, data) => {
+  const db = getFirestore();
 
-  const q = query(collectionRef, ...queries);
+  const docRef = doc(db, col, id);
 
-  const snap = await getCount(q);
+  await setDoc<DocumentData>(docRef, data);
+};
 
-  return snap.data().count;
-}
+export const updateDocument: updateDocumentFunc<FieldValue> = async (
+  col,
+  id,
+  data
+) => {
+  const db = getFirestore();
+
+  const docRef = doc(db, col, id);
+
+  await updateDoc<DocumentData>(docRef, data);
+};
+
+export const newQuery: newQueryFunc<FieldPath, QuerySnapshot> = <
+  T extends CollectionKey,
+  G extends CollectionsMap[T]
+>(
+  col: T
+): NewQueryReturn<T, G, FieldPath, QuerySnapshot> => {
+  const db = getFirestore();
+  const colRef = collection(db, col);
+
+  const queries: QueryConstraint[] = [];
+
+  return {
+    get() {
+      return getDocs(query(colRef, ...queries));
+    },
+
+    limit(n) {
+      queries.push(limit(n));
+
+      return this;
+    },
+
+    where(fieldPath, opStr, value) {
+      queries.push(where(fieldPath as string | FieldPath, opStr, value));
+
+      return this;
+    },
+
+    limitToLast(limit) {
+      queries.push(limitToLast(limit));
+
+      return this;
+    },
+
+    orderBy(fieldPath, directionStr) {
+      queries.push(orderBy(fieldPath as string | FieldPath, directionStr));
+
+      return this;
+    },
+  };
+};
+
+export const queryDocuments: queryDocumentsFuncMap<
+  FieldPath,
+  QuerySnapshot
+> = async <T extends CollectionKey, G extends CollectionsMap[T]>(
+  query: NewQueryReturn<T, G, FieldPath, QuerySnapshot>
+) => {
+  const snap = await query.get();
+
+  const result = new Map<string, G>();
+
+  for (const doc of snap.docs) {
+    result.set(doc.id, {
+      ...(doc.data() as G),
+      id: doc.id,
+    });
+  }
+
+  return result;
+};
