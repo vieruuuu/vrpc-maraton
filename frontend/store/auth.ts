@@ -10,11 +10,14 @@ import { router } from "@/router";
 
 const initialUserState: User = {
   id: "",
-  firstName: "",
-  lastName: "",
   email: "",
 
-  type: "candidate",
+  details: {
+    type: "candidate",
+
+    firstName: "",
+    lastName: "",
+  },
 
   lastLogin: 0,
   registerDate: 0,
@@ -26,6 +29,9 @@ const initialUserState: User = {
 
   quizIds: [],
   quizResponseIds: [],
+
+  jobIds: [],
+  jobResponseIds: [],
 };
 
 export const useAuthStore = defineRefStore("auth", () => {

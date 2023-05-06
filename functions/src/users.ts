@@ -1,6 +1,7 @@
 import { UserRegister } from "types/users";
 import { UnauthenticatedError } from "./lib/errors";
 import { newFunction, setDocument } from "./lib/firebase";
+import { User } from "types/users";
 
 export const createUser = newFunction.https.onCall(async (data, { auth }) => {
   if (!auth) {
@@ -9,22 +10,25 @@ export const createUser = newFunction.https.onCall(async (data, { auth }) => {
 
   const user = UserRegister.parse(data);
 
-  const userData = {
+  const userData: User = {
     id: auth.uid,
     email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
 
     registerDate: Date.now(),
     lastLogin: Date.now(),
 
-    type: user.type,
+    details: user.details,
 
     badges: [],
-    quizIds: [],
-    quizResponseIds: [],
+
     pTestIds: [],
     pTestResponseIds: [],
+
+    quizIds: [],
+    quizResponseIds: [],
+
+    jobIds: [],
+    jobResponseIds: [],
   };
 
   await setDocument("users", auth.uid, userData);
