@@ -1,7 +1,7 @@
 <template>
   <div class="q-ma-lg">
     <div class="flex-center row">
-      <div class="q-my-lg col-12" style="max-width: 1500px">
+      <div class="q-my-lg col-12">
         <div class="text-h4">Howdy Sherif!</div>
         <div class="text-body1">Happy to see you searching for talents</div>
       </div>
@@ -33,8 +33,6 @@
               :options="options2"
               label="Bounty level"
               behavior="dialog"
-              multiple
-              use-chips
             />
             <q-select
               v-model="model1"
