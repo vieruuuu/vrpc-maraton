@@ -28,9 +28,10 @@
               {{ job.title }}
             </div>
             <div class="text-center text-body1">
-              Reward:<span class="text-orange-6 text-weight-bolder">{{
-                job.reward
-              }}</span>
+              Reward:
+              <span class="text-orange-6 text-weight-bolder">
+                {{ job.payment }}
+              </span>
             </div>
           </q-card-section>
           <q-card-section>
@@ -81,7 +82,7 @@ import type { Job } from "types/job";
 import { formatBadgeColor } from "common/lib/quizzes";
 
 const props = defineProps<{
-  job: any;
+  job: Job;
   flipped: boolean;
 }>();
 </script>

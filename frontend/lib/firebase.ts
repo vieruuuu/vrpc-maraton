@@ -1,17 +1,19 @@
-import { initializeApp, getApp, getApps } from "firebase/app";
+import { getApp, getApps, initializeApp } from "firebase/app";
 import {
   browserLocalPersistence,
   browserSessionPersistence,
+  getAuth,
   indexedDBLocalPersistence,
   initializeAuth,
   onAuthStateChanged,
-  getAuth,
 } from "firebase/auth";
 import { getFirestore, initializeFirestore } from "firebase/firestore/lite";
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 import { getStorage } from "firebase/storage";
-import { getDocument } from "./firestore";
+
 import { router } from "@/router";
+
+import { getDocument, updateDocument } from "./firestore";
 
 const appInitialized = getApps().length;
 
@@ -63,9 +65,15 @@ export function loginHook() {
         somethingsWrong("Invalid credentials");
 
         signOut();
+
+        return;
       }
 
       setUser(userData);
+
+      updateDocument("users", userData.id, {
+        lastLogin: Date.now(),
+      });
     } else {
       setUser();
     }

@@ -14,26 +14,32 @@
     <div class="q-pa-md">
       <div class="row q-col-gutter-md">
         <div
-          v-for="i in 4"
-          :key="i"
+          v-for="job in jobs"
+          :key="job.id"
           class="col-xs-12 col-sm-6 col-md-4 q-pa-md"
         >
           <q-card class="q-pa-md">
             <q-card-section>
               <div class="text-h4 text-center">Wanted</div>
               <div class="text-h6 text-center">
-                {{ bounty.title }}
+                {{ job.title }}
               </div>
             </q-card-section>
             <q-separator />
             <q-card-section>
               <div class="text-body2">
                 <div class="text-body1 text-bold">Description:</div>
-                {{ bounty.description }}
+                {{ job.description }}
+              </div>
+            </q-card-section>
+            <q-card-section>
+              <div class="text-body2">
+                <div class="text-body1 text-bold">Description:</div>
+                {{ job.idealCandidate }}
               </div>
             </q-card-section>
             <q-separator />
-            <div class="q-mb-md">
+            <!-- <div class="q-mb-md">
               <div v-for="user in bounty.users" :key="user.id">
                 <q-item>
                   <q-item-section avatar>
@@ -68,9 +74,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <q-separator></q-separator>
+            <q-separator />
+
             <q-card-actions>
               <q-btn
                 class="col-12"
@@ -87,7 +94,15 @@
 </template>
 
 <script lang="ts" setup>
+import { newQuery, queryDocuments } from "@/lib/firestore";
 import JobSubmit from "@@/job-submit.vue";
+import type { Job } from "types/job";
 
-const bounty = ref<any>({});
+const jobs = ref<Job[]>([]);
+
+const { user } = useAuthStore();
+
+queryDocuments(newQuery("jobs").where("companyId", "==", user.value.id)).then(
+  (q) => (jobs.value = [...q.values()])
+);
 </script>

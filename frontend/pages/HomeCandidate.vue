@@ -75,7 +75,7 @@ async function shuffle() {
   shuffling.value = false;
 }
 
-const jobs = ref<any[]>([
+const jobs = ref<Job[]>([
   {
     id: "1",
     description:
@@ -84,7 +84,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["javascript", "cpp"],
     idealCandidate: "",
     level: "junior",
-    reward: "1000-5000$",
+    payment: "<1000$",
+    companyId: "",
   },
   {
     id: "2",
@@ -94,7 +95,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
-    reward: "1000-2000$",
+    payment: "1000$-1500$",
+    companyId: "",
   },
   {
     id: "3",
@@ -104,7 +106,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
-    reward: "300-400$",
+    payment: "2500$-3000$",
+    companyId: "",
   },
   {
     id: "4",
@@ -114,7 +117,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
-    reward: "700-800$",
+    payment: "+3000$",
+    companyId: "",
   },
   {
     id: "5",
@@ -124,7 +128,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
-    reward: "3000-3500$",
+    payment: "1000$-1500$",
+    companyId: "",
   },
   {
     id: "6",
@@ -134,7 +139,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
-    reward: "1000-1500$",
+    payment: "2500$-3000$",
+    companyId: "",
   },
   {
     id: "7",
@@ -144,7 +150,8 @@ const jobs = ref<any[]>([
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
-    reward: "3000-4000$",
+    payment: "1000$-1500$",
+    companyId: "",
   },
 ]);
 </script>

@@ -84,7 +84,7 @@ export function somethingsGood(message?: string) {
     message: message ?? "No errors",
     icon: "done",
     iconSize: "lg",
-    iconColor: "primary",
+    iconColor: "green",
     classes: "text-body1 text-weight-bold",
   });
 }
