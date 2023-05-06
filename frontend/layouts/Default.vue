@@ -6,7 +6,12 @@
           NuStiu
         </q-toolbar-title>
 
-        <q-btn label="Account" to="/account" />
+        <q-btn
+          label="Account"
+          to="/account"
+          color="secondary"
+          class="text-black"
+        />
       </q-toolbar>
     </q-header>
 
@@ -21,7 +26,7 @@
             :duration="100"
           >
             <div class="row flex-center q-pa-sm">
-              <div class="col-xs-12 col-sm col-md-9 col-lg-8 col-xl-5">
+              <div class="col-xs-12 col-sm col-md-9 col-lg-8 col-xl-7">
                 <component :is="Component" />
               </div>
             </div>
