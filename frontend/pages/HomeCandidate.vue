@@ -1,22 +1,31 @@
 <template>
   <div>
-    <div class="text-h4">Howdy Cowboy!</div>
-    <span class="text-body1">Happy hunting!</span>
+    <div>
+      <div class="text-h4">Howdy Cowboy!</div>
+      <span class="text-body1">Happy hunting!</span>
+    </div>
 
-    <q-btn label="Go to quizze s" to="/quizzes" />
+    <div class="row q-col-gutter-md flex-center">
+      <div>
+        <q-btn
+          color="green"
+          outline
+          :label="flipped ? 'Flip Bounties' : 'Check out your bounties!'"
+          :disable="!flipped"
+          @click="flipped = false"
+        />
+      </div>
 
-    <q-btn
-      :label="flipped ? 'Flip Bounties' : 'Check out your bounties!'"
-      :disable="!flipped"
-      @click="flipped = false"
-    />
-
-    <q-btn
-      label="Shuffle cards"
-      :loading="shuffling"
-      :disable="shuffling"
-      @click="shuffle"
-    />
+      <div>
+        <q-btn
+          flat
+          label="Shuffle cards"
+          :loading="shuffling"
+          :disable="shuffling"
+          @click="shuffle"
+        />
+      </div>
+    </div>
 
     <div class="row q-col-gutter-xl flex-center q-mt-xl">
       <transition-group name="flip-list">
@@ -31,17 +40,54 @@
       </transition-group>
     </div>
 
-    <div class="text-h6">Do you want more bounties?</div>
-    <div class="text-h6">Collect badges from quizzes!</div>
+    <div class="q-my-xl">
+      <div class="text-h4">Wanna earn some badges?</div>
+      <div class="text-body1">Solve some quizzes</div>
+    </div>
+
+    <div class="row q-col-gutter-md">
+      <div
+        v-for="quiz in quizzes"
+        :key="quiz.id"
+        class="col-xs-12 col-sm-4 col-md-3 col-lg-3"
+      >
+        <q-card
+          class="my-card text-white"
+          :class="{ ['bg-' + formatBadgeColor(quiz.badgeReward)]: true }"
+        >
+          <q-card-section>
+            <div class="text-h6">
+              Quiz
+              <span class="text-bold">{{
+                formatBadgeName(quiz.badgeReward)
+              }}</span>
+            </div>
+            <div class="text-subtitle2">
+              Number of questions:{{ quiz.questions.length }}
+            </div>
+          </q-card-section>
+          <q-separator></q-separator>
+          <q-card-actions>
+            <q-space></q-space>
+            <q-btn flat>Attempt</q-btn>
+          </q-card-actions>
+        </q-card>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { newQuery, queryDocuments } from "@/lib/firestore";
 import CandidateJobCard from "@@/candidate-job-card.vue";
+import { formatBadgeColor, formatBadgeName } from "common/lib/quizzes";
 import type { Job } from "types/job";
+import type { Quiz } from "types/quizzes";
 
 const flipped = ref(true);
 const shuffling = ref(false);
+
+const quizDisabled = ref(true);
 
 function getRandomArbitrary(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -81,7 +127,19 @@ const jobs = ref<Job[]>([
     description:
       "Looking for a top notch front end dev to develop an restaurant presentation app",
     title: "TS developer",
-    requiredBadges: ["javascript", "cpp"],
+    requiredBadges: [
+      "javascript",
+      "typescript",
+      "java",
+      "php",
+      "html",
+      "css",
+      "driving-license",
+      "rust",
+      "cpp",
+      "c",
+      "csharp",
+    ],
     idealCandidate: "",
     level: "junior",
     payment: "<1000$",
@@ -154,6 +212,12 @@ const jobs = ref<Job[]>([
     companyId: "",
   },
 ]);
+
+const quizzes = ref<Quiz[]>([]);
+
+queryDocuments(newQuery("quizzes")).then(
+  (q) => (quizzes.value = [...q.values()])
+);
 </script>
 
 <style scoped>
