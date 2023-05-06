@@ -17,8 +17,8 @@
               text-color="secondary"
               no-caps
               :options="[
-                { label: 'Candidate', value: 'candidate' },
-                { label: 'Company', value: 'company' },
+                { label: 'Cowboy', value: 'candidate' },
+                { label: 'Sheriff', value: 'company' },
               ]"
             />
           </div>

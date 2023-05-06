@@ -51,13 +51,19 @@ if (import.meta.env.DEV) {
 }
 
 export function loginHook() {
-  const { setUser } = useAuthStore();
+  const { setUser, signOut } = useAuthStore();
 
   router.push("/");
 
   onAuthStateChanged(firebaseAuth, async (user) => {
     if (user && user.email) {
-      const [userData] = await Promise.all([getDocument("users", user.uid)]);
+      const userData = await getDocument("users", user.uid);
+
+      if (!userData) {
+        somethingsWrong("Invalid credentials");
+
+        signOut();
+      }
 
       setUser(userData);
     } else {

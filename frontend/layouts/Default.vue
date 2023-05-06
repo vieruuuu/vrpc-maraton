@@ -3,7 +3,7 @@
     <q-header bordered>
       <q-toolbar>
         <q-toolbar-title class="cursor-pointer" @click="router.push('/home')">
-          vrpc-maraton
+          NuStiu
         </q-toolbar-title>
 
         <q-btn label="Account" to="/account" />
@@ -20,7 +20,11 @@
             leave-active-class="animated fadeOut"
             :duration="100"
           >
-            <component :is="Component" />
+            <div class="row flex-center q-pa-sm">
+              <div class="col-xs-12 col-sm col-md-9 col-lg-8 col-xl-5">
+                <component :is="Component" />
+              </div>
+            </div>
           </transition>
         </router-view>
       </q-page>
