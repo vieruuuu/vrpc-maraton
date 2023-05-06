@@ -8,7 +8,10 @@
       <div class="col-12 row justify-center">
         <q-card class="q-mb-md bg-secondary" style="max-width: 1500px" bordered>
           <div class="text-h4 text-center q-my-lg">
-            <q-icon name="star" />Post a bounty<q-icon name="star" />
+            <q-icon name="star" color="amber-14" />Post a bounty<q-icon
+              name="star"
+              color="amber-14"
+            />
           </div>
           <q-form class="q-mx-xl q-my-md row q-col-gutter-md">
             <q-input class="col-12" outlined label="Bounty title" />
@@ -43,27 +46,68 @@
               label="Bounty Type"
               behavior="dialog"
             />
-            <div class="col-12 items-center">
-              <div class="text-body1 text-center col-12" color="secondary">
-                Salary(hundreds dollars)
-              </div>
-              <q-slider
-                v-model="model3"
-                label
-                label-always
-                color="green"
-                :min="0"
-                :step="1"
-                :max="20"
-              />
+            <div>
+              <q-btn label="Set bounty" />
             </div>
-            <q-btn label="Set bounty" />
           </q-form>
         </q-card>
       </div>
     </div>
 
-    <div class="text-h4">Your bounties:</div>
+    <div class="text-h4 q-mb-md">Your bounties:</div>
+    <div class="q-pa-md">
+      <div class="row q-col-gutter-md">
+        <div
+          v-for="i in 4"
+          :key="i"
+          class="col-xs-12 col-sm-6 col-md-4 col-lg-3 q-pa-md"
+        >
+          <q-card class="q-pa-md bg-secondary">
+            <q-card-section>
+              <div class="text-h4 text-center">Wanted</div>
+              <div class="text-h6 text-center">
+                {{ bounty.title }}
+              </div>
+
+              <div class="text-body2">
+                <div class="text-body1 text-bold">Description:</div>
+                {{ bounty.description }}
+              </div>
+            </q-card-section>
+            <q-separator />
+            <div v-for="user in bounty.users" :key="user.id">
+              <q-item>
+                <q-item-section avatar>
+                  <q-avatar>
+                    <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                  </q-avatar>
+                </q-item-section>
+
+                <q-item-section>
+                  <q-item-label>{{ user.name }}</q-item-label>
+                  <q-item-label caption>{{ user.lastOnline }} </q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <div class="full-width row q-col-gutter-md justify-end">
+                <div class="col-4">
+                  <q-btn
+                    flat
+                    color="black"
+                    class="fit"
+                    label="Profile"
+                    no-caps
+                  />
+                </div>
+                <div class="col-4">
+                  <q-btn outline class="fit" color="primary">Test</q-btn>
+                </div>
+              </div>
+            </div>
+          </q-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,7 +120,33 @@ const model1 = ref();
 const options1 = ref([]);
 const options2 = ref([]);
 const model2 = ref();
-const model3 = ref();
+
+const bounty = ref({});
+
+bounty.value = {
+  title: "JS developer",
+  description: "Looking for high skilled front end dev",
+  users: [
+    {
+      name: "Nicu paleru",
+      lastOnline: "12.05.2023",
+      badges: ["TS", "JS", "HTML"],
+      id: "11",
+    },
+    {
+      name: "Nicu Oieru",
+      lastOnline: "17.04.2023",
+      badges: ["TS", "JS", "HTML"],
+      id: "1",
+    },
+    {
+      name: "Nicu Boieru",
+      lastOnline: "18.06.2023",
+      badges: ["TS", "JS", "HTML"],
+      id: "12",
+    },
+  ],
+};
 
 options2.value = ["Junior", "Mid-level", "Senior"];
 options1.value = ["Part-time", "Full-time"];
