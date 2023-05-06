@@ -5,13 +5,16 @@
         <q-toolbar-title class="cursor-pointer" @click="router.push('/home')">
           NuStiu
         </q-toolbar-title>
-
-        <q-btn
-          label="Account"
-          to="/account"
-          color="secondary"
-          class="text-black"
-        />
+        <div>
+          <q-btn
+            no-caps
+            icon="person"
+            label="Account"
+            to="/account"
+            color="secondary"
+            class="text-black"
+          />
+        </div>
       </q-toolbar>
     </q-header>
 

@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div class="text-h4"></div>
-
-    <div class="text-h5">
-      You only have a limited number of bounties per day!
-    </div>
-    <div class="text-h5">Earn badges to see more bounties!</div>
+    <div class="text-h4">Howdy Cowboy!</div>
+    <span class="text-body1">Happy hunting!</span>
 
     <q-btn label="Go to quizze s" to="/quizzes" />
 
@@ -79,62 +75,76 @@ async function shuffle() {
   shuffling.value = false;
 }
 
-const jobs = ref<Job[]>([
+const jobs = ref<any[]>([
   {
     id: "1",
-    description: "989823Test descriere1",
-    title: "Caut TS Dev",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
+    title: "TS developer",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "1000-5000$",
   },
   {
     id: "2",
-    description: "9123Test descriere2",
-    title: "Caut TS Dev",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
+    title: "PHP developer",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "1000-2000$",
   },
   {
     id: "3",
-    description: "456Test descriere3",
-    title: "Caut TS Dev",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
+    title: "CSS developer",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "300-400$",
   },
   {
     id: "4",
-    description: "13677Test descriere4",
-    title: "Caut TS Dev",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
+    title: "Web Designer",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "700-800$",
   },
   {
     id: "5",
-    description: "4634Test descriere5",
-    title: "Caut TS Dev",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
+    title: "Back end senior dev",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "3000-3500$",
   },
   {
     id: "6",
-    description: "4634Test descriere5",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
     title: "Caut TS Dev",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "1000-1500$",
   },
   {
     id: "7",
-    description: "4634Test descriere5",
-    title: "Caut TS Dev",
+    description:
+      "Looking for a top notch front end dev to develop an restaurant presentation app",
+    title: "TS Dev",
     requiredBadges: ["typescript"],
     idealCandidate: "",
     level: "junior",
+    reward: "3000-4000$",
   },
 ]);
 </script>

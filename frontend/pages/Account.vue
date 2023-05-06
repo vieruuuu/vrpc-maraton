@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-mt-xl">
     <q-card>
       <div>
         <q-item>
@@ -32,7 +32,21 @@
         </q-item>
 
         <template v-if="user.details.type === 'candidate'">
-          <p>Badges: {{ user.badges.length }}</p>
+          <div class="q-ma-lg">
+            <div class="text-bold">Personal description</div>
+            <div>
+              Worked on 2 projects for the company: CMS and a broker website.
+              Learned to work with Ubuntu, Bash, Github. Implemented new
+              features and helped solve problems. Collaborated with a small team
+              to find solutions that will benefit the projects.
+            </div>
+            <div class="q-my-md">
+              <div class="text-bold text-body1">Info:</div>
+              <div>Email:{{ user.email }}</div>
+              <div>Phone: 0774 457 666</div>
+              <div>Address:Romania , Iasi</div>
+            </div>
+          </div>
         </template>
         <template v-else>
           <div class="q-ma-lg">
@@ -53,7 +67,12 @@
           </div>
         </template>
 
-        <q-btn class="q-ma-md" label="Sign out" @click="signOut" />
+        <q-btn
+          color="secondary"
+          class="q-ma-md text-black"
+          label="Sign out"
+          @click="signOut"
+        />
       </div>
     </q-card>
   </div>
