@@ -103,7 +103,12 @@
                     />
                   </div>
                   <div class="col-4">
-                    <q-btn outline class="fit" color="primary">Test</q-btn>
+                    <q-btn
+                      outline
+                      class="fit"
+                      color="orange-10"
+                      label="Place bounty"
+                    />
                   </div>
                 </div>
               </div>
