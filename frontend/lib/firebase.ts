@@ -11,7 +11,7 @@ import { getFirestore, initializeFirestore } from "firebase/firestore/lite";
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 import { getStorage } from "firebase/storage";
 import { getDocument } from "./firestore";
-import { Router } from "@/router";
+import { router } from "@/router";
 
 const appInitialized = getApps().length;
 
@@ -53,7 +53,7 @@ if (import.meta.env.DEV) {
 export function loginHook() {
   const { setUser } = useAuthStore();
 
-  Router.push("/");
+  router.push("/");
 
   onAuthStateChanged(firebaseAuth, async (user) => {
     if (user && user.email) {

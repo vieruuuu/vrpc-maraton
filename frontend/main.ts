@@ -3,14 +3,6 @@ import "quasar/src/css/index.sass";
 
 import "./css/app.scss";
 
-import { initializeApp } from "firebase/app";
-import {
-  browserLocalPersistence,
-  browserSessionPersistence,
-  indexedDBLocalPersistence,
-  initializeAuth,
-} from "firebase/auth";
-import { initializeFirestore } from "firebase/firestore/lite";
 import { createPinia } from "pinia";
 import {
   Dialog,
@@ -24,13 +16,13 @@ import { createApp } from "vue";
 
 import App from "./App.vue";
 import { loginHook } from "./lib/firebase";
-import { Router } from "./router";
+import { router } from "./router";
 
 const app = createApp(App);
 
 app.use(createPinia());
 
-app.use(Router);
+app.use(router);
 
 app.use(Quasar, {
   plugins: { Dialog, Notify, Loading, LocalStorage, LoadingBar },

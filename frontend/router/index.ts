@@ -21,19 +21,19 @@ function stopLoading() {
   LoadingBar.stop();
 }
 
-const Router = createRouter({
+const router = createRouter({
   routes,
   history: createWebHistory(),
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-Router.beforeEach(() => {
+router.beforeEach(() => {
   // ii dau stop daca ii deja pornita animatia de loading
   stopLoading();
   // afisez animatia de loading din partea de sus a paginii inainte de toate
   startLoading();
 });
 
-Router.afterEach(stopLoading);
+router.afterEach(stopLoading);
 
-export { Router };
+export { router };

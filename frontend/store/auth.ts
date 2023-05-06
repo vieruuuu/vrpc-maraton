@@ -4,11 +4,28 @@ import type { User } from "types/users";
 
 import { defineRefStore } from "./lib/defineRefStore";
 
+import { signOut as firebaseSignOut } from "firebase/auth";
+import { firebaseAuth } from "@/lib/firebase";
+import { router } from "@/router";
+
 const initialUserState: User = {
   id: "",
   firstName: "",
   lastName: "",
   email: "",
+
+  type: "candidate",
+
+  lastLogin: 0,
+  registerDate: 0,
+
+  badges: [],
+
+  pTestIds: [],
+  pTestResponseIds: [],
+
+  quizIds: [],
+  quizResponseIds: [],
 };
 
 export const useAuthStore = defineRefStore("auth", () => {
@@ -32,7 +49,16 @@ export const useAuthStore = defineRefStore("auth", () => {
     }
 
     userLogged.value = userExists;
+
     setAuth(userExists);
+  }
+
+  async function signOut() {
+    await firebaseSignOut(firebaseAuth);
+
+    setUser();
+
+    router.push("/login");
   }
 
   return {
@@ -40,5 +66,6 @@ export const useAuthStore = defineRefStore("auth", () => {
     userSaved,
     userLogged,
     setUser,
+    signOut,
   };
 });
