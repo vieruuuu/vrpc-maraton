@@ -3,6 +3,8 @@
     <q-header bordered>
       <q-toolbar>
         <q-toolbar-title> vrpc-maraton </q-toolbar-title>
+
+        <q-btn label="Sign out" @click="signOut" />
       </q-toolbar>
     </q-header>
 
@@ -24,4 +26,6 @@
   </q-layout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { signOut } = useAuthStore();
+</script>

@@ -29,3 +29,14 @@ export const User = z.object({
 });
 
 export type User = z.infer<typeof User>;
+
+export const UserRegister = User.pick({
+  id: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+
+  type: true,
+});
+
+export type UserRegister = z.infer<typeof UserRegister>;
