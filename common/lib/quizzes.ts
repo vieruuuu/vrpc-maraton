@@ -26,3 +26,30 @@ export function formatBadgeName(badge: QuizBadge): string {
       return "Javascript";
   }
 }
+
+export function formatBadgeColor(badge: QuizBadge): string {
+  switch (badge) {
+    case "c":
+      return "yellow";
+    case "cpp":
+      return "yellow";
+    case "csharp":
+      return "yellow";
+    case "css":
+      return "yellow";
+    case "driving-license":
+      return "yellow";
+    case "html":
+      return "yellow";
+    case "java":
+      return "yellow";
+    case "php":
+      return "yellow";
+    case "rust":
+      return "yellow";
+    case "typescript":
+      return "blue";
+    case "javascript":
+      return "yellow";
+  }
+}

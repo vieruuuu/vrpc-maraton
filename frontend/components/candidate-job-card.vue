@@ -47,7 +47,7 @@
                   :key="badge"
                   :label="badge"
                   outline
-                  color="blue"
+                  :color="formatBadgeColor(badge)"
                   class="text-subtitle2 text-bold"
                 />
               </div>
@@ -78,6 +78,7 @@
 
 <script setup lang="ts">
 import type { Job } from "types/job";
+import { formatBadgeColor } from "common/lib/quizzes";
 
 const props = defineProps<{
   job: any;

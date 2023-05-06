@@ -81,7 +81,7 @@ const jobs = ref<any[]>([
     description:
       "Looking for a top notch front end dev to develop an restaurant presentation app",
     title: "TS developer",
-    requiredBadges: ["typescript"],
+    requiredBadges: ["javascript", "cpp"],
     idealCandidate: "",
     level: "junior",
     reward: "1000-5000$",
