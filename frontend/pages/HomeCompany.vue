@@ -16,7 +16,7 @@
         <div
           v-for="i in 4"
           :key="i"
-          class="col-xs-12 col-sm-6 col-md-4 col-lg-3 q-pa-md"
+          class="col-xs-12 col-sm-6 col-md-4 q-pa-md"
         >
           <q-card class="q-pa-md">
             <q-card-section>
@@ -58,7 +58,7 @@
                       no-caps
                     />
                   </div>
-                  <div class="col-4">
+                  <div class="col-8">
                     <q-btn
                       outline
                       class="fit"

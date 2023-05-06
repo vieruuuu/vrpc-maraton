@@ -1,16 +1,45 @@
 <template>
   <div>
-    <q-btn label="Sign out" @click="signOut" />
+    <q-card>
+      <div>
+        <q-item>
+          <q-item-section avatar>
+            <q-avatar size="xl">
+              <img src="https://xsgames.co/randomusers/avatar.php?g=male" />
+            </q-avatar>
+          </q-item-section>
 
-    <p>Type: {{ user.details.type }}</p>
+          <q-item-section class="text-body1">
+            <q-item-label>{{ formatUserName(user) }}</q-item-label>
+            <q-item-label caption>Type:{{ user.details.type }}</q-item-label>
+          </q-item-section>
+        </q-item>
 
-    <p>Name: {{ formatUserName(user) }}</p>
+        <template v-if="user.details.type === 'candidate'">
+          <p>Badges: {{ user.badges.length }}</p>
+        </template>
+        <template v-else>
+          <div class="q-ma-lg">
+            <div class="text-bold">Description</div>
+            <div>
+              Our is a young, dedicated promoting company. We work hard to
+              promote your brand and reach new customers. Our team is
+              knowledgeable about the latest in online marketing, social media,
+              and search engine optimization. We have an intense focus on
+              driving conversions and increasing sales for our clients.
+            </div>
+            <div class="q-my-md">
+              <div class="text-bold text-body1">Info:</div>
+              <div>Email:{{ user.email }}</div>
+              <div>Phone: 0774 777 666</div>
+              <div>HQ:Romania , Iasi</div>
+            </div>
+          </div>
+        </template>
 
-    <p>Email: {{ user.email }}</p>
-
-    <template v-if="user.details.type === 'candidate'">
-      <p>Badges: {{ user.badges }}</p>
-    </template>
+        <q-btn class="q-ma-md" label="Sign out" @click="signOut" />
+      </div>
+    </q-card>
   </div>
 </template>
 
