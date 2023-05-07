@@ -3,7 +3,12 @@
     <q-header bordered>
       <q-toolbar>
         <q-toolbar-title class="cursor-pointer" @click="router.push('/home')">
-          NuStiu
+          <div>
+            <div class="text-body1 text-amber-5 row">
+              <q-icon :name="'img:' + getAsset('logo.png')" size="20px" />
+              <div>Bounty<span class="text-white">Trail</span></div>
+            </div>
+          </div>
         </q-toolbar-title>
         <div>
           <q-btn
