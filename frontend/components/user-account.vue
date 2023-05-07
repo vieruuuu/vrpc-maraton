@@ -32,6 +32,19 @@
             and helped solve problems. Collaborated with a small team to find
             solutions that will benefit the projects.
           </div>
+          <div>
+            <div class="text-h6 text-bold q-mt-sm">Earned Badges:</div>
+            <div class="row q-col-gutter-md">
+              <div v-for="badge in user.badges" :key="badge">
+                <q-badge
+                  :label="formatBadgeName(badge)"
+                  outline
+                  :color="formatBadgeColor(badge)"
+                  class="text-subtitle2 text-bold"
+                />
+              </div>
+            </div>
+          </div>
           <div class="q-my-md">
             <div class="text-bold text-h6">Info:</div>
 
@@ -95,6 +108,7 @@ import {
 } from "chart.js";
 import type { User } from "types/users";
 import UserImage from "./user-image.vue";
+import { formatBadgeColor, formatBadgeName } from "common/lib/quizzes";
 
 defineProps<{
   user: User;
