@@ -1,6 +1,6 @@
 <template>
   <div class="full-height">
-    <div style="min-height: 500px">
+    <div>
       <transition
         appear
         mode="out-in"
