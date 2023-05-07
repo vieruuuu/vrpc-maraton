@@ -70,16 +70,6 @@ import type { QuizResponse } from "types/quiz-responses";
 import type { QuizSolution } from "types/quiz-solutions";
 import type { Quiz } from "types/quizzes";
 
-/*
-console.log({
-  optionA: document.getElementById("label1").innerText,
-  optionB: document.getElementById("label2").innerText,
-  optionC: document.getElementById("label3").innerText,
-  optionD: document.getElementById("label4").innerText,
-  question: document.getElementById("qtext").innerText,
-});
-*/
-
 const quiz = ref<Quiz>({
   id: "",
   badgeReward: "csharp",

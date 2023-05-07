@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div style="height: 500px">
+  <div class="full-height">
+    <div style="min-height: 500px">
       <transition
         appear
         mode="out-in"
@@ -44,7 +44,7 @@
             <div class="q-my-sm">
               <div class="q-gutter-sm">
                 <q-badge
-                  :label="job.level"
+                  :label="formatJobLevel(job.level)"
                   outline
                   color="white"
                   class="text-subtitle2 text-bold"
@@ -60,25 +60,31 @@
               </div>
             </div>
 
-            <div class="text-h6 text-bold q-mt-sm q-mb-xs">Posted by:</div>
-            <q-item class="bg-secondary">
-              <q-item-section avatar>
-                <q-avatar>
-                  <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                </q-avatar>
-              </q-item-section>
+            <template v-if="company && company.details.type === 'company'">
+              <div class="text-h6 text-bold q-mt-sm q-mb-xs">Posted by:</div>
+              <div @click="showDialog = true">
+                <q-item class="bg-secondary cursor-pointer">
+                  <q-item-section avatar>
+                    <user-image size="55px" :user="company" />
+                  </q-item-section>
 
-              <q-item-section class="text-primary">
-                <q-item-label>bytex</q-item-label>
-                <q-item-label caption class="text-bold"> Company </q-item-label>
-              </q-item-section>
-            </q-item>
+                  <q-item-section class="text-primary">
+                    <q-item-label>{{ company.details.name }}</q-item-label>
+                    <q-item-label caption class="text-bold">
+                      Company
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </div>
+
+              <user-account-dialog
+                v-model="showDialog"
+                :user-id="job.companyId"
+              />
+            </template>
           </q-card-section>
 
-          <q-card-actions
-            style="position: absolute; bottom: 0"
-            class="row full-width"
-          >
+          <q-card-actions class="row full-width">
             <div class="col-12">
               <q-btn
                 class="fit"
@@ -95,12 +101,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Job } from "types/job";
+import { formatJobLevel } from "common/lib/jobs";
 import { formatBadgeColor } from "common/lib/quizzes";
 import { formatBadgeName } from "common/lib/quizzes";
+import type { Job } from "types/job";
+
+import UserAccountDialog from "./user-account-dialog.vue";
+import UserImage from "./user-image.vue";
+
+const { users } = useUsersStore();
+
+const showDialog = ref(false);
 
 const props = defineProps<{
   job: Job;
   flipped: boolean;
 }>();
+
+const company = computed(() => users.value.get(props.job.companyId));
 </script>

@@ -54,6 +54,9 @@ if (import.meta.env.DEV) {
 
 export function loginHook() {
   const { setUser, signOut, enableLoginHook } = useAuthStore();
+  const { fetchUsers } = useUsersStore();
+  const { fetchQuizzes } = useQuizzesStore();
+  const { fetchJobs } = useJobsStore();
 
   router.push("/");
 
@@ -68,6 +71,8 @@ export function loginHook() {
 
         return;
       }
+
+      await Promise.all([fetchJobs(), fetchQuizzes(), fetchUsers()]);
 
       setUser(userData);
 
