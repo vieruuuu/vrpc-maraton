@@ -70,11 +70,11 @@
         <div class="q-ma-lg">
           <div class="text-bold">Description</div>
           <div>
-            Our is a young, dedicated promoting company. We work hard to promote
-            your brand and reach new customers. Our team is knowledgeable about
-            the latest in online marketing, social media, and search engine
-            optimization. We have an intense focus on driving conversions and
-            increasing sales for our clients.
+            Our company is a new ,reliable and innovation focused company. We
+            work hard to promote your brand and reach new customers. Our team is
+            knowledgeable about the latest in online marketing, social media,
+            and search engine optimization. We have an intense focus on driving
+            conversions and increasing sales for our clients.
           </div>
           <div class="q-my-md">
             <div class="text-bold text-body1">Info:</div>
