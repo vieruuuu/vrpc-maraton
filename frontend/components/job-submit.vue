@@ -3,8 +3,15 @@
     <q-form ref="formRef" @submit="submit">
       <q-card class="q-mb-md" bordered flat>
         <div class="text-h4 text-center q-my-lg q-px-md">
-          <q-icon name="star" color="amber-14" />
+          <q-icon
+            v-if="!screen.sm && !screen.md && !screen.lg"
+            name="star"
+            color="amber-14"
+          />
           Post a bounty
+
+          <div v-if="screen.sm || screen.md || screen.lg" />
+
           <q-icon name="star" color="amber-14" />
         </div>
 
@@ -109,6 +116,7 @@ import { addDocument, updateDocument } from "@/lib/firestore";
 import { arrayUnion } from "firebase/firestore/lite";
 
 const { user } = useAuthStore();
+const { screen } = useQuasar();
 
 const initialJobData = (): Job => ({
   id: "",
