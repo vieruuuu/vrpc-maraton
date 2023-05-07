@@ -3,16 +3,11 @@
     <q-form ref="formRef" @submit="submit">
       <q-card class="q-mb-md" bordered flat>
         <div class="text-h4 text-center q-my-lg q-px-md">
-          <q-icon
-            v-if="!screen.sm && !screen.md && !screen.lg"
-            name="star"
-            color="amber-14"
-          />
+          <q-icon name="star" color="amber-14" />
+          <div v-if="screen.xs" />
           Post a bounty
 
-          <div v-if="screen.sm || screen.md || screen.lg" />
-
-          <q-icon name="star" color="amber-14" />
+          <q-icon v-if="!screen.xs" name="star" color="amber-14" />
         </div>
 
         <q-card-section class="row q-col-gutter-md">
