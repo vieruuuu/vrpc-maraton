@@ -1,9 +1,45 @@
 <template>
   <div>
     <div v-if="titlePage">
-      <div class="text-h1">NUSTIU</div>
+      <div>
+        <div
+          class="text-h1 text-amber-5 row justify-center"
+          style="min-width: max-content"
+        >
+          <q-icon :name="'img:' + getAsset('logo.png')" size="80px" />
+          Bounty<span class="text-white">Trail</span>
+        </div>
 
-      <q-btn label="Play" color="primary" @click="titlePage = false" />
+        <div class="row justify-center q-mt-md q-mb-xl">
+          <q-btn
+            class="text-black"
+            label="Play"
+            color="amber-5"
+            size="lg"
+            @click="titlePage = false"
+          />
+        </div>
+      </div>
+
+      <div class="q-my-xl text-white text-justify">
+        <div class="text-body1 text-bold text-center q-mb-sm">
+          What is BountyTrail?
+        </div>
+        <div class="text-body2 q-mb-xs">
+          💼 A new and exciting way of connecting employers and employees..
+        </div>
+        <div class="text-body2 q-mb-xs">
+          ⭐ As a employer you will "play" as a Sheriff who is posting
+          bounties(jobs opportunities) and paying rewards(starting bonus)
+        </div>
+        <div class="text-body2 q-mb-xs">
+          🤠 As a employee you will "play" as a Cowboy always looking for his
+          new bounty to collect and for his rewards to cash out
+        </div>
+        <div class="text-h6 q-mb-xs text-center">
+          So are you ready to conquer the Wild West?
+        </div>
+      </div>
     </div>
 
     <q-form v-else @submit="login">

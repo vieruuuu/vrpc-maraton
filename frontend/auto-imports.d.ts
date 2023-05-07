@@ -62,12 +62,14 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useDialogPluginComponent: typeof import('quasar')['useDialogPluginComponent']
   const useFormChild: typeof import('quasar')['useFormChild']
+  const useJobsStore: typeof import('./store/quizzes')['useJobsStore']
   const useLink: typeof import('vue-router')['useLink']
   const useMeta: typeof import('quasar')['useMeta']
   const useQuasar: typeof import('quasar')['useQuasar']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
+  const useUsersStore: typeof import('./store/users')['useUsersStore']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -140,12 +142,14 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDialogPluginComponent: UnwrapRef<typeof import('quasar')['useDialogPluginComponent']>
     readonly useFormChild: UnwrapRef<typeof import('quasar')['useFormChild']>
+    readonly useJobsStore: UnwrapRef<typeof import('./store/quizzes')['useJobsStore']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useMeta: UnwrapRef<typeof import('quasar')['useMeta']>
     readonly useQuasar: UnwrapRef<typeof import('quasar')['useQuasar']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useUsersStore: UnwrapRef<typeof import('./store/users')['useUsersStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
