@@ -23,6 +23,7 @@ const routes = [
     children: [
       { path: "home", component: () => import("@/pages/Home.vue") },
       { path: "quizzes", component: () => import("@/pages/Quizzes.vue") },
+      { path: "games", component: () => import("@/pages/Games.vue") },
       { path: "account", component: () => import("@/pages/Account.vue") },
     ],
   },

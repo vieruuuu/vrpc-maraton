@@ -3,10 +3,10 @@
     <div v-if="titlePage">
       <div>
         <div
-          class="text-h1 text-amber-5 row justify-center"
-          style="min-width: max-content"
+          class="text-amber-5 row justify-center text-bold"
+          :class="textClass"
         >
-          <q-icon :name="'img:' + getAsset('logo.png')" size="80px" />
+          <q-icon :name="'img:' + getAsset('logo.png')" :size="imgSize" />
           Bounty<span class="text-white">Trail</span>
         </div>
 
@@ -88,6 +88,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "@/lib/firebase";
 import EmailInput from "@@/email-input.vue";
 import PasswordInput from "@@/password-input.vue";
+
+const { screen } = useQuasar();
+
+const imgSize = computed(() => (screen.lt.md ? "40px" : "80px"));
+const textClass = computed(() => (screen.lt.md ? "text-h3" : "text-h1"));
 
 const titlePage = ref(true);
 

@@ -1,6 +1,6 @@
 import { defineRefStore } from "./lib/defineRefStore";
 import { newQuery, queryDocuments } from "@/lib/firestore";
-import { filterMap } from "common/lib/maps";
+import { extractFromMap, filterMap } from "common/lib/maps";
 import type { Job } from "types/job";
 
 export const useJobsStore = defineRefStore("jobs", () => {
@@ -9,9 +9,16 @@ export const useJobsStore = defineRefStore("jobs", () => {
   const jobs = ref(new Map<string, Job>());
 
   const myJobs = computed(() =>
-    filterMap(jobs.value, ({ requiredBadges }) =>
-      user.value.badges.some((b) => requiredBadges.includes(b))
+    filterMap(
+      jobs.value,
+      ({ requiredBadges, id }) =>
+        user.value.badges.some((b) => requiredBadges.includes(b)) &&
+        !user.value.jobIds.includes(id)
     )
+  );
+
+  const appliedJobs = computed(() =>
+    extractFromMap(jobs.value, user.value.jobIds)
   );
 
   const companyJobs = computed(() =>
@@ -24,6 +31,7 @@ export const useJobsStore = defineRefStore("jobs", () => {
 
   return {
     jobs,
+    appliedJobs,
     myJobs,
     companyJobs,
     fetchJobs,

@@ -18,10 +18,14 @@
           <q-card-section class="bg-secondary text-primary">
             <div class="text-center text-h3 text-bold">
               <q-icon
+                v-if="!screen.sm && !screen.md && !screen.lg"
                 style="transform: scaleX(-1)"
                 :name="'img:' + getAsset('revolver.png')"
               />
+
               Wanted
+              <div v-if="screen.sm || screen.md || screen.lg" />
+
               <q-icon :name="'img:' + getAsset('revolver.png')" />
             </div>
             <div class="text-center text-h6">
@@ -71,7 +75,7 @@
                   <q-item-section class="text-primary">
                     <q-item-label>{{ company.details.name }}</q-item-label>
                     <q-item-label caption class="text-bold">
-                      Company
+                      Sheriff
                     </q-item-label>
                   </q-item-section>
                 </q-item>
@@ -116,6 +120,7 @@ import { arrayUnion } from "firebase/firestore/lite";
 
 const { users } = useUsersStore();
 const { user } = useAuthStore();
+const { screen } = useQuasar();
 
 const showDialog = ref(false);
 

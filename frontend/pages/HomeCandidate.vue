@@ -59,6 +59,22 @@
         class="col-xs-12 col-sm-4 col-md-3 col-lg-3"
       />
     </div>
+
+    <template v-if="appliedJobs.size > 0">
+      <div class="q-mt-xl q-mb-xl">
+        <div class="text-h4">You applied to these bounties:</div>
+      </div>
+
+      <div class="row q-col-gutter-xl flex-center">
+        <candidate-job-card
+          v-for="job in appliedJobs.values()"
+          :key="job.id"
+          class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 full-height"
+          :job="job"
+          :flipped="false"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -66,26 +82,31 @@
 import CandidateJobCard from "@@/candidate-job-card.vue";
 
 import QuizCard from "@@/quiz-card.vue";
+import { sortMap } from "common/lib/maps";
 
 const flipped = ref(true);
 const shuffling = ref(false);
 
 const { user } = useAuthStore();
-const { myJobs } = useJobsStore();
+const { myJobs, jobs, appliedJobs } = useJobsStore();
 const { quizzes } = useQuizzesStore();
 
+function getRandomArbitrary(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
 function randomizeArray() {
-  const moves = 100;
+  let moves = 100;
 
-  // jobs.value.sort(() => {
-  //   if (moves === 0) {
-  //     return 1;
-  //   }
+  jobs.value = sortMap(jobs.value, () => {
+    if (moves === 0) {
+      return 1;
+    }
 
-  //   moves--;
+    moves--;
 
-  //   return getRandomArbitrary(-50, 50);
-  // });
+    return getRandomArbitrary(-50, 50);
+  });
 }
 
 async function shuffle() {

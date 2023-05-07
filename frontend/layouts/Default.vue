@@ -4,12 +4,24 @@
       <q-toolbar>
         <q-toolbar-title class="cursor-pointer" @click="router.push('/home')">
           <div>
-            <div class="text-body1 text-amber-5 row">
+            <div class="text-body1 text-bold text-amber-5 row">
               <q-icon :name="'img:' + getAsset('logo.png')" size="20px" />
               <div>Bounty<span class="text-white">Trail</span></div>
             </div>
           </div>
         </q-toolbar-title>
+
+        <div v-if="user.details.type === 'candidate'" class="q-mr-md">
+          <q-btn
+            no-caps
+            icon="sports_esports"
+            label="Games"
+            to="/games"
+            color="secondary"
+            class="text-black"
+          />
+        </div>
+
         <div>
           <q-btn
             no-caps
@@ -47,4 +59,5 @@
 
 <script setup lang="ts">
 const router = useRouter();
+const { user } = useAuthStore();
 </script>
