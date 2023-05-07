@@ -21,22 +21,22 @@
         </div>
       </div>
 
-      <div class="q-my-xl text-white text-justify">
-        <div class="text-body1 text-bold text-center q-mb-sm">
+      <div class="q-my-xl text-white text-h6 text-justify q-pa-md">
+        <div class="text-bold text-h4 text-center q-mb-lg">
           What is BountyTrail?
         </div>
-        <div class="text-body2 q-mb-xs">
+        <div class="q-mb-xs">
           💼 A new and exciting way of connecting employers and employees..
         </div>
-        <div class="text-body2 q-mb-xs">
-          ⭐ As a employer you will "play" as a Sheriff who is posting
-          bounties(jobs opportunities) and paying rewards(starting bonus)
+        <div class="q-mb-xs">
+          ⭐ As a employer you will "play" as a Sheriff who is posting bounties
+          (jobs opportunities) and paying rewards (starting bonus)
         </div>
-        <div class="text-body2 q-mb-xs">
+        <div class=" ">
           🤠 As a employee you will "play" as a Cowboy always looking for his
           new bounty to collect and for his rewards to cash out
         </div>
-        <div class="text-h6 q-mb-xs text-center">
+        <div class="text-h5 text-bold q-mt-lg text-center">
           So are you ready to conquer the Wild West?
         </div>
       </div>

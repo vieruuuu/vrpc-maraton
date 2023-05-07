@@ -128,6 +128,8 @@ const jobPosted = ref(false);
 
 const formRef = ref<{ resetValidation: () => void; reset: () => void }>();
 
+const { jobs } = useJobsStore();
+
 async function submit() {
   loading.value = true;
   jobPosted.value = false;
@@ -139,6 +141,12 @@ async function submit() {
 
   await updateDocument("users", user.value.id, {
     jobIds: arrayUnion(jobId),
+  });
+
+  jobs.value.set(jobId, {
+    ...job.value,
+    id: jobId,
+    companyId: user.value.id,
   });
 
   job.value = initialJobData();

@@ -88,9 +88,12 @@
             <div class="col-12">
               <q-btn
                 class="fit"
-                label="Apply"
+                :label="user.jobIds.includes(job.id) ? 'Applied' : 'Apply'"
                 color="secondary"
+                :loading="loading"
                 text-color="primary"
+                :disable="user.jobIds.includes(job.id)"
+                @click="submit"
               />
             </div>
           </q-card-actions>
@@ -108,8 +111,11 @@ import type { Job } from "types/job";
 
 import UserAccountDialog from "./user-account-dialog.vue";
 import UserImage from "./user-image.vue";
+import { updateDocument } from "@/lib/firestore";
+import { arrayUnion } from "firebase/firestore/lite";
 
 const { users } = useUsersStore();
+const { user } = useAuthStore();
 
 const showDialog = ref(false);
 
@@ -119,4 +125,24 @@ const props = defineProps<{
 }>();
 
 const company = computed(() => users.value.get(props.job.companyId));
+
+const loading = ref(false);
+
+async function submit() {
+  if (user.value.jobIds.includes(props.job.id)) {
+    return;
+  }
+
+  loading.value = true;
+
+  await updateDocument("users", user.value.id, {
+    jobIds: arrayUnion(props.job.id),
+  });
+
+  user.value.jobIds.push(props.job.id);
+
+  somethingsGood("Successfully applied!");
+
+  loading.value = false;
+}
 </script>

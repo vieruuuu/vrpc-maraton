@@ -14,7 +14,7 @@
     <div class="q-pa-md">
       <div class="row q-col-gutter-md">
         <div
-          v-for="job in jobs"
+          v-for="job in companyJobs.values()"
           :key="job.id"
           class="col-xs-12 col-sm-6 col-md-4 q-pa-md"
         >
@@ -25,22 +25,11 @@
                 {{ job.title }}
               </div>
             </q-card-section>
+
             <q-separator />
-            <q-card-section>
-              <div class="text-body2">
-                <div class="text-body1 text-bold">Description:</div>
-                {{ job.description }}
-              </div>
-            </q-card-section>
-            <q-card-section>
-              <div class="text-body2">
-                <div class="text-body1 text-bold">Description:</div>
-                {{ job.idealCandidate }}
-              </div>
-            </q-card-section>
-            <q-separator />
-            <!-- <div class="q-mb-md">
-              <div v-for="user in bounty.users" :key="user.id">
+
+            <div v-if="candidates(job.id).size > 0" class="q-mb-md">
+              <div v-for="u in candidates(job.id).values()" :key="u.id">
                 <q-item>
                   <q-item-section avatar>
                     <q-avatar>
@@ -49,8 +38,10 @@
                   </q-item-section>
 
                   <q-item-section>
-                    <q-item-label>{{ user.name }}</q-item-label>
-                    <q-item-label caption>{{ user.lastOnline }} </q-item-label>
+                    <q-item-label>{{ formatUserName(u) }}</q-item-label>
+                    <q-item-label caption
+                      >{{ formatDate(u.lastLogin) }}
+                    </q-item-label>
                   </q-item-section>
                 </q-item>
 
@@ -65,6 +56,7 @@
                     />
                   </div>
                   <div class="col-8">
+                    z
                     <q-btn
                       outline
                       class="fit"
@@ -74,7 +66,9 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
+
+            <div v-else>No cowboys intereseted in dthis pula</div>
 
             <q-separator />
 
@@ -94,15 +88,19 @@
 </template>
 
 <script lang="ts" setup>
-import { newQuery, queryDocuments } from "@/lib/firestore";
+import { formatDate } from "common/lib/date";
+import { filterMap } from "common/lib/maps";
+import { formatUserName } from "common/lib/users";
+
 import JobSubmit from "@@/job-submit.vue";
-import type { Job } from "types/job";
 
-const jobs = ref<Job[]>([]);
+const { companyJobs } = useJobsStore();
+const { users } = useUsersStore();
 
-const { user } = useAuthStore();
-
-queryDocuments(newQuery("jobs").where("companyId", "==", user.value.id)).then(
-  (q) => (jobs.value = [...q.values()])
-);
+const candidates = (jobId: string) =>
+  filterMap(
+    users.value,
+    ({ jobIds, details }) =>
+      details.type === "candidate" && jobIds.includes(jobId)
+  );
 </script>

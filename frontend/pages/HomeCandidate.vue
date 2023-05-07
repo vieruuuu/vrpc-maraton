@@ -52,55 +52,27 @@
     </div>
 
     <div class="row q-col-gutter-md">
-      <div
+      <quiz-card
         v-for="quiz in quizzes.values()"
         :key="quiz.id"
+        :quiz="quiz"
         class="col-xs-12 col-sm-4 col-md-3 col-lg-3"
-      >
-        <q-card
-          class="my-card text-white"
-          :class="{ ['bg-' + formatBadgeColor(quiz.badgeReward)]: true }"
-        >
-          <q-card-section>
-            <div class="text-h6">
-              Quiz
-              <span class="text-bold">{{
-                formatBadgeName(quiz.badgeReward)
-              }}</span>
-            </div>
-            <div class="text-subtitle2">
-              Number of questions:{{ quiz.questions.length }}
-            </div>
-          </q-card-section>
-          <q-separator></q-separator>
-          <q-card-actions>
-            <q-space></q-space>
-            <q-btn flat>Attempt</q-btn>
-          </q-card-actions>
-        </q-card>
-      </div>
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import CandidateJobCard from "@@/candidate-job-card.vue";
-import { formatBadgeColor, formatBadgeName } from "common/lib/quizzes";
-import type { Job } from "types/job";
-import type { Quiz } from "types/quizzes";
+
+import QuizCard from "@@/quiz-card.vue";
 
 const flipped = ref(true);
 const shuffling = ref(false);
 
-const quizDisabled = ref(true);
-
 const { user } = useAuthStore();
 const { myJobs } = useJobsStore();
 const { quizzes } = useQuizzesStore();
-
-function getRandomArbitrary(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
 
 function randomizeArray() {
   const moves = 100;

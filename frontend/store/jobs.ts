@@ -14,6 +14,10 @@ export const useJobsStore = defineRefStore("jobs", () => {
     )
   );
 
+  const companyJobs = computed(() =>
+    filterMap(jobs.value, ({ companyId }) => user.value.id === companyId)
+  );
+
   async function fetchJobs() {
     jobs.value = await queryDocuments(newQuery("jobs"));
   }
@@ -21,6 +25,7 @@ export const useJobsStore = defineRefStore("jobs", () => {
   return {
     jobs,
     myJobs,
+    companyJobs,
     fetchJobs,
   };
 });
