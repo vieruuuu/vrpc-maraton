@@ -2,12 +2,21 @@
   <div>
     <div v-if="titlePage">
       <div>
-        <div
-          class="text-amber-5 row justify-center text-bold"
-          :class="textClass"
-        >
-          <q-icon :name="'img:' + getAsset('logo.png')" :size="imgSize" />
-          Bounty<span class="text-white">Trail</span>
+        <div class="text-amber-5 text-center text-bold" :class="textClass">
+          <q-icon
+            style="display: inline-block; vertical-align: middle"
+            :name="'img:' + getAsset('logo.png')"
+            :size="imgSize"
+          />
+          <div style="display: inline-block; vertical-align: middle">
+            Bounty
+          </div>
+          <div
+            style="display: inline-block; vertical-align: middle"
+            class="text-white"
+          >
+            Trail
+          </div>
         </div>
 
         <div class="row justify-center q-mt-md q-mb-xl">

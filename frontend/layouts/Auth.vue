@@ -20,7 +20,7 @@
         'margin-top': '30vh',
       }"
     >
-      <div class="q-pa-md col-xs-12 col-lg-3">
+      <div class="q-pa-md col-xs-12 col-lg-5">
         <loading-login v-if="userSaved" />
 
         <router-view v-else />
