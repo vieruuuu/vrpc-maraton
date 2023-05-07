@@ -18,13 +18,13 @@
           <q-card-section class="bg-secondary text-primary">
             <div class="text-center text-h3 text-bold">
               <q-icon
-                v-if="!screen.sm && !screen.md && !screen.lg"
+                v-if="!screen.xs && !screen.sm && !screen.md && !screen.lg"
                 style="transform: scaleX(-1)"
                 :name="'img:' + getAsset('revolver.png')"
               />
 
               Wanted
-              <div v-if="screen.sm || screen.md || screen.lg" />
+              <div v-if="screen.xs || screen.sm || screen.md || screen.lg" />
 
               <q-icon :name="'img:' + getAsset('revolver.png')" />
             </div>
@@ -32,7 +32,6 @@
               {{ job.title }}
             </div>
             <div class="text-center text-body1">
-              {{ screen.name }}
               Reward:
               <span class="text-orange-6 text-weight-bolder">
                 {{ job.payment }}
